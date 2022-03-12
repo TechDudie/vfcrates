@@ -28,4 +28,8 @@ function register_key(name, loot)
   })
 end
 
-loot = {"jumpdrive:engine", "jumpdrive:fleet_controller", "jumpdrive:backbone 99", "xtraores:helmet_chromium", "xtraores:chestplate_chromium", "xtraores:leggings_chromium", "xtraores:boots_chromium", "xtraores:pickaxe_chromium"}
+loot = {"jumpdrive:engine 16", "jumpdrive:fleet_controller 2", "jumpdrive:backbone 99", "xtraores:helmet_chromium", "xtraores:chestplate_chromium", "xtraores:leggings_chromium", "xtraores:boots_chromium", "xtraores:pickaxe_chromium"}
+register_key("silver", loot)
+register_key("gold", loot)
+register_key("vfium", loot)
+register_key("rainbow", loot)
