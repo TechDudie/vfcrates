@@ -21,7 +21,9 @@ function register_key(name, loot)
     on_use = function(itemstack, user, pointed_thing)
       if minetest.get_node(pointed_thing.under).name == "vfcrates:key_opener" then
         local player_name = user:get_player_name()
+        local returned = take_item(itemstack)
         local drop = loot[math.random(#loot)]
+        user:get_inventory():add_item("main", get_item(returned) .. " " .. get_count(returned))
         return drop
       end
     end
