@@ -18,12 +18,12 @@ function register_key(name, loot)
   minetest.register_craftitem("vfcrates:" .. name .. "_key", {
     description = upper(name) .. " Key",
     inventory_image = "vfcrates_" .. name .. "_key.png",
-    on_punch = function(itemstack, user, pointed_thing)
-      if minetest.get_node(pointed_thing.above).name == "vfcrates:key_opener" then
+    on_use = function(itemstack, user, pointed_thing)
+      if minetest.get_node(pointed_thing.under).name == "vfcrates:key_opener" then
         local player_name = user:get_player_name()
-        local drop = loot[math.random(#loot)
+        local drop = loot[math.random(#loot)]
         return drop
-      }
+      end
     end
   })
 end
