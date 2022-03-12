@@ -32,7 +32,8 @@ function register_key(name, loot, texture)
         local returned = take_item(itemstack)
         returned = set_name(get_name(returned) .. "\n" .. minetest.colorize("#00FF00", upper(name) .. " Crate Loot"))
         local drop = loot[math.random(#loot)]
-        user:get_inventory():add_item("main", get_item(returned) .. " " .. get_count(returned))
+        minetest.chat_send_all(playername .. " won a " .. drop .. " from a " .. upper(name) .. " Crate!")
+        user:get_inventory():add_item("main", get_name(returned) .. " " .. get_count(returned))
         return drop
       end
     end
