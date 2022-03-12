@@ -16,7 +16,7 @@ minetest.register_node("vfcrates:key_opener", {
 })
 
 function register_key(name, loot, texture)
-  local texture = "vfcrates_default_key.png"
+  local img = "vfcrates_default_key.png"
   if texture == nil then
     img = "vfcrates_" .. name .. "_key.png"
   end
