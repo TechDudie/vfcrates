@@ -2,6 +2,7 @@ function upper(str)
     return (str:gsub("^%l", string.upper))
 end
 
+-- Will be replaced soon with specific crates for specific keys
 minetest.register_node("vfcrates:key_opener", {
   description = "Key Opener",
   tiles = {
@@ -14,7 +15,14 @@ minetest.register_node("vfcrates:key_opener", {
   }
 })
 
-function register_key(name, loot)
+function register_key(name, loot, texture)
+  local texture = "vfcrates_default_key.png"
+  if texture == nil then
+    img = "vfcrates_" .. name .. "_key.png"
+  end
+  if texture:sub(1, 1) == "#" then
+    img = "vfcrates_default_key.png^[colorize:" .. texture .. ":255"
+  end
   minetest.register_craftitem("vfcrates:" .. name .. "_key", {
     description = upper(name) .. " Key",
     inventory_image = "vfcrates_" .. name .. "_key.png",
