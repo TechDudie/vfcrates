@@ -28,7 +28,6 @@ function register_key(name, loot, texture)
   if modifier ~= "" then
     key_texture = "vfcrates_default_key.png" .. modifier
   end
-  local color = "#00FF00"
   minetest.register_node("vfcrates:" .. name .. "_crate", {
     description = upper(name) .. " Crate",
     tiles = {
