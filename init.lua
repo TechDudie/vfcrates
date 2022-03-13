@@ -15,19 +15,26 @@ minetest.register_node("vfcrates:key_opener", {
   }
 })
 
-function register_key(name, loot, texture)
-  local img = "vfcrates_default_key.png"
-  img = "vfcrates_" .. name .. "_key.png"
-  if texture ~= nil then
-    if texture:sub(1, 1) == "#" then
-      img = "vfcrates_default_key.png^[colorize:" .. texture .. ":255"
-    end
-  end
+function register_key(name, loot)
+  minetest.register_node("vfcrates:" .. name .. "_crate", {
+    description = upper(name) .. " Crate",
+    tiles = {
+      "vfcrates_crate_" .. name .. "_up.png",
+      "vfcrates_crate_" .. name .. "_down.png",
+      "vfcrates_crate_" .. name .. "_right.png",
+      "vfcrates_crate_" .. name .. "_left.png",
+      "vfcrates_crate_" .. name .. "_back.png",
+      "vfcrates_crate_" .. name .. "_front.png",
+    }
+  })
   minetest.register_tool("vfcrates:" .. name .. "_key", {
     description = upper(name) .. " Key",
     inventory_image = "vfcrates_" .. name .. "_key.png",
     on_use = function(itemstack, user, pointed_thing)
-      if minetest.get_node(pointed_thing.under).name == "vfcrates:key_opener" then
+      if minetest.get_node(pointed_thing.under).name ~= "vfcrates:" .. name .. "_crate" then
+        return nil
+      end
+      if minetest.get_node(pointed_thing.under).name == "vfcrates:" .. name .. "_crate" then
         local player_name = user:get_player_name()
         local drop = loot[math.random(#loot)]
         local returned = ItemStack(drop)
@@ -41,8 +48,7 @@ function register_key(name, loot, texture)
   })
 end
 
---loot = {"jumpdrive:engine 16", "jumpdrive:fleet_controller 2", "jumpdrive:backbone 99", "xtraores:helmet_chromium", "xtraores:chestplate_chromium", "xtraores:leggings_chromium", "xtraores:boots_chromium", "xtraores:pickaxe_chromium"}
-loot = {"jumpdrive:engine 16", "jumpdrive:fleet_controller 2", "jumpdrive:backbone 99"}
+loot = {"jumpdrive:engine 16", "jumpdrive:fleet_controller 2", "jumpdrive:backbone 99", "xtraores:helmet_chromium", "xtraores:chestplate_chromium", "xtraores:leggings_chromium", "xtraores:boots_chromium", "xtraores:pickaxe_chromium"}
 register_key("silver", loot)
 register_key("gold", loot)
 register_key("vfium", loot)
